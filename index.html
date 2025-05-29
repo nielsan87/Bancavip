@@ -2,110 +2,97 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Login e Painel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El Diacho de Tips</title>
   <style>
     body, html {
       height: 100%;
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #b22222;
+      background: url('file-SMhUENCRpA6MvGuTcuW9Cj') no-repeat center center fixed;
+      background-size: cover;
       display: flex;
       justify-content: center;
       align-items: center;
     }
-    .login-box, .app-box {
-      background: white;
+
+    .login-box {
+      background-color: rgba(0, 0, 0, 0.7);
+      border: 2px solid red;
+      border-radius: 15px;
       padding: 30px;
-      border-radius: 8px;
-      width: 300px;
-      box-shadow: 0 0 10px #800000a0;
-      display: none;
-    }
-    .login-box.active, .app-box.active {
-      display: block;
-    }
-    h2, h1 {
+      width: 320px;
+      color: white;
       text-align: center;
-      margin-bottom: 20px;
-      color: #b22222;
     }
+
+    .login-box h1 {
+      color: red;
+      margin-bottom: 20px;
+    }
+
     input[type="text"], input[type="password"] {
       width: 100%;
       padding: 10px;
-      margin: 8px 0 20px 0;
-      border: 1px solid #b22222;
-      border-radius: 4px;
-      font-size: 16px;
-    }
-    button {
-      background-color: #b22222;
+      margin: 10px 0;
+      border: 1px solid red;
+      border-radius: 5px;
+      background-color: #111;
       color: white;
+    }
+
+    button {
+      background-color: red;
+      color: black;
       border: none;
-      width: 100%;
       padding: 12px;
+      width: 100%;
       font-size: 16px;
-      border-radius: 4px;
+      border-radius: 5px;
       cursor: pointer;
+      font-weight: bold;
     }
+
     button:hover {
-      background-color: #800000;
+      background-color: #cc0000;
     }
+
     .error {
-      color: #800000;
-      text-align: center;
-      margin-bottom: 10px;
+      color: red;
+      margin-top: 10px;
       display: none;
     }
-    .panel-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 20px;
-      justify-content: center;
-    }
-    .panel-buttons button {
-      width: 100%;
-      margin: 5px 0;
-      padding: 12px;
-      font-size: 16px;
-      border-radius: 6px;
+
+    .app-box {
+      display: none;
+      color: white;
     }
   </style>
 </head>
 <body>
 
-<div class="login-box active" id="loginBox">
-  <h2>Login</h2>
-  <div id="error" class="error">Usuário ou senha incorretos!</div>
-  <input type="text" id="username" placeholder="Usuário" />
+<div class="login-box" id="loginBox">
+  <h1>El Diacho de Tips</h1>
+  <input type="text" id="username" placeholder="Nome de Usuário" />
   <input type="password" id="password" placeholder="Senha" />
   <button onclick="login()">Entrar</button>
+  <div class="error" id="error">Usuário ou senha incorretos!</div>
 </div>
 
 <div class="app-box" id="appBox">
-  <h1>Painel de Controle</h1>
-  <div class="panel-buttons">
-    <button onclick="alert('Erro de sistema detectado!')">Erro de Sistema</button>
-    <button onclick="alert('Falha na rede!')">Falha na Rede</button>
-    <button onclick="alert('Jogos ao vivo ativados!')">Ativa Jogos Ao Vivo</button>
-    <button onclick="alert('Telegram VIP liberado! 👑')">Libera Telegram VIP 👑</button>
-    <button onclick="alert('Pagamento pendente!')">Pagamento Pendente</button>
-    <button onclick="alert('Pagamento recebido!')">Pagamento Recebido</button>
-    <button onclick="alert('IA Atualizada com sucesso!')">Atualizar IA</button>
-  </div>
+  <h2>Bem-vindo!</h2>
+  <p>Painel carregado.</p>
 </div>
 
 <script>
   function login() {
-    const user = document.getElementById('username').value;
-    const pass = document.getElementById('password').value;
+    const user = document.getElementById('username').value.trim();
+    const pass = document.getElementById('password').value.trim();
     const error = document.getElementById('error');
 
     if (user === 'Victor' && pass === 'v2025') {
-      document.getElementById('loginBox').classList.remove('active');
-      document.getElementById('appBox').classList.add('active');
-      error.style.display = 'none';
+      document.getElementById('loginBox').style.display = 'none';
+      document.getElementById('appBox').style.display = 'block';
     } else {
       error.style.display = 'block';
     }
