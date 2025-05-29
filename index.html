@@ -5,83 +5,140 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>El Diacho de Tips</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body, html {
       height: 100%;
       margin: 0;
       font-family: Arial, sans-serif;
-      background: url('file-SMhUENCRpA6MvGuTcuW9Cj') no-repeat center center fixed;
+      background: url('https://i.imgur.com/Vljh6F6.jpg') no-repeat center center fixed;
       background-size: cover;
       display: flex;
       justify-content: center;
       align-items: center;
+      padding: 10px;
     }
 
-    .login-box {
-      background-color: rgba(0, 0, 0, 0.7);
+    .login-box, .app-box {
+      background-color: rgba(0, 0, 0, 0.85);
+      padding: 30px 20px;
+      border-radius: 10px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 0 20px red;
+      display: none;
       border: 2px solid red;
-      border-radius: 15px;
-      padding: 30px;
-      width: 320px;
-      color: white;
-      text-align: center;
     }
 
-    .login-box h1 {
+    .login-box.active, .app-box.active {
+      display: block;
+    }
+
+    h1 {
+      text-align: center;
       color: red;
       margin-bottom: 20px;
     }
 
     input[type="text"], input[type="password"] {
       width: 100%;
-      padding: 10px;
-      margin: 10px 0;
+      padding: 12px;
+      margin-bottom: 15px;
       border: 1px solid red;
-      border-radius: 5px;
-      background-color: #111;
+      border-radius: 4px;
+      background: black;
       color: white;
+      font-size: 16px;
     }
 
     button {
-      background-color: red;
-      color: black;
-      border: none;
       padding: 12px;
-      width: 100%;
-      font-size: 16px;
-      border-radius: 5px;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-size: 14px;
       cursor: pointer;
-      font-weight: bold;
+      flex: 1;
+      min-width: 120px;
+      transition: transform 0.2s;
     }
 
     button:hover {
-      background-color: #cc0000;
+      transform: scale(1.05);
     }
 
     .error {
       color: red;
-      margin-top: 10px;
+      text-align: center;
       display: none;
+      margin-bottom: 10px;
     }
 
-    .app-box {
-      display: none;
+    .panel-buttons {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .panel-buttons button:nth-child(1) { background-color: #e74c3c; }
+    .panel-buttons button:nth-child(2) { background-color: #f39c12; }
+    .panel-buttons button:nth-child(3) { background-color: #3498db; }
+    .panel-buttons button:nth-child(4) { background-color: #9b59b6; }
+    .panel-buttons button:nth-child(5) { background-color: #1abc9c; }
+    .panel-buttons button:nth-child(6) { background-color: #2ecc71; }
+    .panel-buttons button:nth-child(7) { background-color: #e67e22; }
+    .panel-buttons button:nth-child(8) { background-color: #27ae60; }
+
+    .support {
+      text-align: center;
+      margin-top: 20px;
       color: white;
+      font-size: 14px;
+    }
+
+    .robot-animation {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 20px;
+      background: url('https://media.giphy.com/media/H4uGJf2OQ6kUE/giphy.gif') center center no-repeat;
+      background-size: contain;
+    }
+
+    @media (min-width: 600px) {
+      .panel-buttons button {
+        min-width: 150px;
+      }
     }
   </style>
 </head>
 <body>
 
-<div class="login-box" id="loginBox">
+<div class="login-box active" id="loginBox">
   <h1>El Diacho de Tips</h1>
+  <div id="error" class="error">Usuário ou senha incorretos!</div>
   <input type="text" id="username" placeholder="Nome de Usuário" />
   <input type="password" id="password" placeholder="Senha" />
-  <button onclick="login()">Entrar</button>
-  <div class="error" id="error">Usuário ou senha incorretos!</div>
+  <button style="background-color: red;" onclick="login()">Entrar</button>
 </div>
 
 <div class="app-box" id="appBox">
-  <h2>Bem-vindo!</h2>
-  <p>Painel carregado.</p>
+  <div class="robot-animation"></div>
+  <h1>El Diacho de Tips</h1>
+  <div class="panel-buttons">
+    <button onclick="alert('Erro de sistema detectado!')">Erro de Sistema</button>
+    <button onclick="alert('Falha na rede!')">Falha na Rede</button>
+    <button onclick="alert('Jogos ao vivo ativados!')">Jogos Ao Vivo</button>
+    <button onclick="alert('Telegram VIP liberado! 👑')">Telegram VIP 👑</button>
+    <button onclick="alert('Pagamento pendente!')">Pagamento Pendente</button>
+    <button onclick="alert('Pagamento recebido!')">Pagamento Recebido</button>
+    <button onclick="alert('IA Atualizada com sucesso!')">Atualizar IA</button>
+    <button onclick="alert('Buscando sinal...')">Servidor Geral</button>
+  </div>
+  <div class="support">Suporte: Adm Victor</div>
 </div>
 
 <script>
@@ -91,8 +148,9 @@
     const error = document.getElementById('error');
 
     if (user === 'Victor' && pass === 'v2025') {
-      document.getElementById('loginBox').style.display = 'none';
-      document.getElementById('appBox').style.display = 'block';
+      document.getElementById('loginBox').classList.remove('active');
+      document.getElementById('appBox').classList.add('active');
+      error.style.display = 'none';
     } else {
       error.style.display = 'block';
     }
