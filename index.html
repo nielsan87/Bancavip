@@ -1,161 +1,300 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>El Diacho de Tips</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tela de ADM Victor</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body, html {
-      height: 100%;
+    body {
+      background-color: #0a0a23;
+      color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: url('https://i.imgur.com/Vljh6F6.jpg') no-repeat center center fixed;
-      background-size: cover;
+      padding: 20px;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      padding: 10px;
+      justify-content: center;
+      min-height: 100vh;
     }
-
-    .login-box, .app-box {
-      background-color: rgba(0, 0, 0, 0.85);
-      padding: 30px 20px;
-      border-radius: 10px;
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      color: #00ffff;
+      text-shadow: 0 0 8px #00c8ff;
+    }
+    img {
       max-width: 400px;
       width: 100%;
-      box-shadow: 0 0 20px red;
-      display: none;
-      border: 2px solid red;
-    }
-
-    .login-box.active, .app-box.active {
-      display: block;
-    }
-
-    h1 {
-      text-align: center;
-      color: red;
+      border-radius: 16px;
+      box-shadow: 0 0 40px rgba(0, 200, 255, 0.4);
+      transition: transform 0.4s ease;
       margin-bottom: 20px;
     }
-
-    input[type="text"], input[type="password"] {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 15px;
-      border: 1px solid red;
-      border-radius: 4px;
-      background: black;
-      color: white;
-      font-size: 16px;
-    }
-
-    button {
-      padding: 12px;
-      border: none;
-      border-radius: 6px;
-      color: white;
-      font-size: 14px;
-      cursor: pointer;
-      flex: 1;
-      min-width: 120px;
-      transition: transform 0.2s;
-    }
-
-    button:hover {
+    img:hover {
       transform: scale(1.05);
     }
-
-    .error {
-      color: red;
+    p {
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: #cccccc;
+      max-width: 600px;
       text-align: center;
-      display: none;
-      margin-bottom: 10px;
     }
 
-    .panel-buttons {
-      margin-top: 20px;
+    /* Login Screen */
+    #login-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      width: 320px;
+      background: #111138;
+      padding: 25px 30px;
+      border-radius: 16px;
+      box-shadow: 0 0 30px #00c8ffaa;
+    }
+    #login-screen label {
+      font-weight: bold;
+      color: #00c8ff;
+      align-self: flex-start;
+    }
+    #login-screen input[type="text"],
+    #login-screen input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+    }
+    #login-screen button {
+      background-color: #00c8ff;
+      border: none;
+      padding: 12px;
+      color: #003344;
+      font-weight: bold;
+      font-size: 1.2em;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+    }
+    #login-screen button:hover {
+      background-color: #00ffff;
+    }
+    #login-error {
+      color: #ff4444;
+      font-weight: bold;
+      display: none;
+    }
+
+    /* Second Screen */
+    #second-screen {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      max-width: 900px;
+      gap: 20px;
+      align-items: center;
+    }
+    .boletos {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
+    }
+    .boleto {
+      flex: 1;
+      padding: 20px;
+      margin: 0 10px;
+      border-radius: 12px;
+      font-weight: bold;
+      font-size: 1.2em;
+      box-shadow: 0 0 15px;
+      color: #111;
+      text-align: center;
+    }
+    .boleto-left {
+      background: linear-gradient(135deg, #00ffff, #0099cc);
+    }
+    .boleto-right {
+      background: linear-gradient(135deg, #ff0080, #ff6666);
+    }
+
+    .buttons-container {
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      max-width: 900px;
+    }
+    .btn {
+      background-color: #00c8ff;
+      border: none;
+      padding: 14px 22px;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 1.1em;
+      color: #003344;
+      cursor: pointer;
+      box-shadow: 0 0 15px #00c8ffaa;
+      transition: background-color 0.3s ease;
+      display: flex;
+      align-items: center;
       gap: 10px;
+      min-width: 180px;
       justify-content: center;
     }
-
-    .panel-buttons button:nth-child(1) { background-color: #e74c3c; }
-    .panel-buttons button:nth-child(2) { background-color: #f39c12; }
-    .panel-buttons button:nth-child(3) { background-color: #3498db; }
-    .panel-buttons button:nth-child(4) { background-color: #9b59b6; }
-    .panel-buttons button:nth-child(5) { background-color: #1abc9c; }
-    .panel-buttons button:nth-child(6) { background-color: #2ecc71; }
-    .panel-buttons button:nth-child(7) { background-color: #e67e22; }
-    .panel-buttons button:nth-child(8) { background-color: #27ae60; }
-
-    .support {
-      text-align: center;
-      margin-top: 20px;
-      color: white;
-      font-size: 14px;
+    .btn:hover {
+      background-color: #00ffff;
     }
 
-    .robot-animation {
-      width: 100px;
-      height: 100px;
-      margin: 0 auto 20px;
-      background: url('https://media.giphy.com/media/H4uGJf2OQ6kUE/giphy.gif') center center no-repeat;
-      background-size: contain;
+    /* Message display */
+    #message-box {
+      margin-top: 30px;
+      background: #001122cc;
+      border-radius: 12px;
+      padding: 20px;
+      width: 90%;
+      max-width: 800px;
+      min-height: 80px;
+      color: #00ffff;
+      font-size: 1.3em;
+      box-shadow: 0 0 25px #00c8ffcc inset;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
     }
 
-    @media (min-width: 600px) {
-      .panel-buttons button {
-        min-width: 150px;
-      }
+    /* Robozinho piscando para 3ia */
+    .robot {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      background: #00ffff;
+      position: relative;
+      animation: blink 1.5s infinite;
+      box-shadow: 0 0 6px #00ffff;
     }
+    .robot::before {
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 4px;
+      width: 4px;
+      height: 4px;
+      background: #003344;
+      border-radius: 50%;
+      box-shadow: 8px 0 #003344;
+    }
+    @keyframes blink {
+      0%, 100% { background: #00ffff; }
+      50% { background: #004466; }
+    }
+
   </style>
 </head>
 <body>
 
-<div class="login-box active" id="loginBox">
-  <h1>El Diacho de Tips</h1>
-  <div id="error" class="error">Usuário ou senha incorretos!</div>
-  <input type="text" id="username" placeholder="Nome de Usuário" />
-  <input type="password" id="password" placeholder="Senha" />
-  <button style="background-color: red;" onclick="login()">Entrar</button>
-</div>
+  <h1>Tela de ADM Victor</h1>
 
-<div class="app-box" id="appBox">
-  <div class="robot-animation"></div>
-  <h1>El Diacho de Tips</h1>
-  <div class="panel-buttons">
-    <button onclick="alert('Erro de sistema detectado!')">Erro de Sistema</button>
-    <button onclick="alert('Falha na rede!')">Falha na Rede</button>
-    <button onclick="alert('Jogos ao vivo ativados!')">Jogos Ao Vivo</button>
-    <button onclick="alert('Telegram VIP liberado! 👑')">Telegram VIP 👑</button>
-    <button onclick="alert('Pagamento pendente!')">Pagamento Pendente</button>
-    <button onclick="alert('Pagamento recebido!')">Pagamento Recebido</button>
-    <button onclick="alert('IA Atualizada com sucesso!')">Atualizar IA</button>
-    <button onclick="alert('Buscando sinal...')">Servidor Geral</button>
+  <!-- Login Screen -->
+  <div id="login-screen">
+    <label for="user">Usuário</label>
+    <input type="text" id="user" placeholder="Digite seu usuário" autocomplete="username" />
+    
+    <label for="pass">Senha</label>
+    <input type="password" id="pass" placeholder="Digite sua senha" autocomplete="current-password" />
+    
+    <button id="login-btn">Entrar</button>
+    <div id="login-error">Usuário ou senha inválidos!</div>
   </div>
-  <div class="support">Suporte: Adm Victor</div>
-</div>
 
-<script>
-  function login() {
-    const user = document.getElementById('username').value.trim();
-    const pass = document.getElementById('password').value.trim();
-    const error = document.getElementById('error');
+  <!-- Second Screen -->
+  <div id="second-screen">
 
-    if (user === 'Victor' && pass === 'v2025') {
-      document.getElementById('loginBox').classList.remove('active');
-      document.getElementById('appBox').classList.add('active');
-      error.style.display = 'none';
-    } else {
-      error.style.display = 'block';
-    }
-  }
-</script>
+    <div class="boletos">
+      <div class="boleto boleto-left">Boleto 1</div>
+      <div class="boleto boleto-right">Boleto 2</div>
+    </div>
 
+    <div class="buttons-container">
+      <button class="btn" id="btn-telegram">Permissão para telegram vip</button>
+      <button class="btn" id="btn-servidor">Servidor</button>
+      <button class="btn" id="btn-erro-acesso">Erro de acesso</button>
+      <button class="btn" id="btn-tela-preta">Tela preta pagamento</button>
+      <button class="btn" id="btn-pagamento-pendente">Pagamento pendente</button>
+      <button class="btn" id="btn-operacao-codigo">Operação código</button>
+      <button class="btn" id="btn-atualizacao-ia">Atualização da ia</button>
+      <button class="btn" id="btn-3ia">
+        3ia
+        <div class="robot"></div>
+      </button>
+    </div>
+
+    <div id="message-box">Clique em um botão para ver a mensagem aqui.</div>
+
+  </div>
+
+  <script>
+    const loginBtn = document.getElementById('login-btn');
+    const userInput = document.getElementById('user');
+    const passInput = document.getElementById('pass');
+    const loginScreen = document.getElementById('login-screen');
+    const secondScreen = document.getElementById('second-screen');
+    const loginError = document.getElementById('login-error');
+    const messageBox = document.getElementById('message-box');
+
+    loginBtn.addEventListener('click', () => {
+      const user = userInput.value.trim();
+      const pass = passInput.value.trim();
+      if(user === 'Victor' && pass === 'v2025') {
+        loginError.style.display = 'none';
+        loginScreen.style.display = 'none';
+        secondScreen.style.display = 'flex';
+      } else {
+        loginError.style.display = 'block';
+      }
+    });
+
+    // Mensagens dos botões
+    const btnTelegram = document.getElementById('btn-telegram');
+    const btnServidor = document.getElementById('btn-servidor');
+    const btnErroAcesso = document.getElementById('btn-erro-acesso');
+    const btnTelaPreta = document.getElementById('btn-tela-preta');
+    const btnPagamentoPendente = document.getElementById('btn-pagamento-pendente');
+    const btnOperacaoCodigo = document.getElementById('btn-operacao-codigo');
+    const btnAtualizacaoIa = document.getElementById('btn-atualizacao-ia');
+    const btn3ia = document.getElementById('btn-3ia');
+
+    btnTelegram.addEventListener('click', () => {
+      messageBox.textContent = 'Permissão para telegram vip concedida.';
+    });
+    btnServidor.addEventListener('click', () => {
+      messageBox.textContent = 'Serviço 100% ativo.';
+    });
+    btnErroAcesso.addEventListener('click', () => {
+      messageBox.textContent = 'Erro de rede, erro login.';
+    });
+    btnTelaPreta.addEventListener('click', () => {
+      messageBox.textContent = 'Tela preta - pagamento.';
+    });
+    btnPagamentoPendente.addEventListener('click', () => {
+      messageBox.textContent = 'Pagamento pendente. Analisando sistema...';
+    });
+    btnOperacaoCodigo.addEventListener('click', () => {
+      messageBox.textContent = 'Operação código em andamento.';
+    });
+    btnAtualizacaoIa.addEventListener('click', () => {
+      messageBox.textContent = 'Atualização da IA em progresso.';
+    });
+
+    btn3ia.addEventListener('click', () => {
+      // Mostra mensagem com o robô piscando (já no botão)
+      messageBox.innerHTML = 'Buscando sistema... <div class="robot"></div>';
+    });
+  </script>
 </body>
 </html>
