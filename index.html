@@ -1,342 +1,116 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>El Diacho de Tips - Apostas</title>
-<style>
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #000;
-    color: #fff;
-  }
-  header {
-    background-color: #d32f2f;
-    padding: 20px;
-    text-align: center;
-  }
-  nav {
-    display: flex;
-    justify-content: center;
-    background-color: #222;
-  }
-  nav a {
-    color: white;
-    padding: 14px 20px;
-    text-decoration: none;
-    display: block;
-  }
-  nav a:hover {
-    background-color: #444;
-  }
-  .hero {
-    text-align: center;
-    padding: 40px;
-    background-image: url('imagem-inteligencia-artificial.jpg');
-    background-size: cover;
-    background-position: center;
-    color: white;
-  }
-  .form-container {
-    padding: 20px;
-    background-color: #111;
-    max-width: 400px;
-    margin: 20px auto;
-    border-radius: 10px;
-  }
-  .form-container h2 {
-    text-align: center;
-  }
-  .form-group {
-    margin-bottom: 15px;
-  }
-  .form-group label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  .form-group input {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-  }
-  .form-group button {
-    width: 100%;
-    padding: 10px;
-    background-color: #d32f2f;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  .form-group button:hover {
-    background-color: #b71c1c;
-  }
-  footer {
-    text-align: center;
-    padding: 10px;
-    background-color: #111;
-    margin-top: 40px;
-  }
-  #usuarios-cadastrados {
-    max-width: 400px;
-    margin: 10px auto 30px auto;
-    background-color: #222;
-    padding: 15px;
-    border-radius: 10px;
-    color: #ddd;
-  }
-  #usuarios-cadastrados h3 {
-    margin-top: 0;
-    text-align: center;
-  }
-  #usuarios-cadastrados ul {
-    list-style: none;
-    padding-left: 0;
-    max-height: 150px;
-    overflow-y: auto;
-  }
-  #usuarios-cadastrados li {
-    padding: 5px 0;
-    border-bottom: 1px solid #444;
-    opacity: 0;
-    transform: translateY(10px);
-    animation: fadeInUp 0.5s forwards;
-  }
-
-  /* Animação fadeInUp */
-  @keyframes fadeInUp {
-    to {
-      opacity: 1;
-      transform: translateY(0);
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login e Painel</title>
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #b22222;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-  }
-
-  /* Estilo para a seção do Chute Milionário */
-  #chute-milionario {
-    display: none;
-    padding: 40px 20px;
-    text-align: center;
-  }
-  #chute-milionario h1 {
-    color: gold;
-    font-size: 3em;
-    margin-bottom: 10px;
-    text-shadow: 0 0 8px gold;
-  }
-  #chute-milionario .btn-group {
-    margin: 20px 0 40px;
-  }
-  #chute-milionario .btn {
-    background-color: #d32f2f;
-    color: white;
-    border: none;
-    padding: 15px 30px;
-    margin: 0 10px;
-    border-radius: 6px;
-    font-size: 1.2em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    text-decoration: none;
-    display: inline-block;
-    min-width: 140px;
-  }
-  #chute-milionario .btn:hover {
-    background-color: #b71c1c;
-  }
-  #chute-milionario .message {
-    font-size: 1.5em;
-    margin-bottom: 40px;
-    color: #eee;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    text-shadow: 0 0 5px #d32f2f;
-  }
-  #chute-milionario footer {
-    margin-top: 60px;
-    color: #777;
-    font-size: 0.9em;
-  }
-  #chute-milionario .bottom-buttons {
-    margin-top: 30px;
-  }
-  #chute-milionario .bottom-buttons .btn {
-    min-width: 180px;
-    font-weight: bold;
-  }
-</style>
+    .login-box, .app-box {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      width: 300px;
+      box-shadow: 0 0 10px #800000a0;
+      display: none;
+    }
+    .login-box.active, .app-box.active {
+      display: block;
+    }
+    h2, h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #b22222;
+    }
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0 20px 0;
+      border: 1px solid #b22222;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    button {
+      background-color: #b22222;
+      color: white;
+      border: none;
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #800000;
+    }
+    .error {
+      color: #800000;
+      text-align: center;
+      margin-bottom: 10px;
+      display: none;
+    }
+    .panel-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+      justify-content: center;
+    }
+    .panel-buttons button {
+      width: 100%;
+      margin: 5px 0;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 6px;
+    }
+  </style>
 </head>
 <body>
 
-<header>
-  <h1>El Diacho de Tips</h1>
-</header>
-<nav>
-  <a href="#">Início</a>
-  <a href="#">Esportes</a>
-  <a href="#">Ao Vivo</a>
-  <a href="#cadastro">Cadastrar-se</a>
-  <a href="#">Cassino</a>
-</nav>
-
-<div class="hero">
-  <h2>Aposte com Inteligência</h2>
-  <p>Encontre as melhores oportunidades com IA</p>
+<div class="login-box active" id="loginBox">
+  <h2>Login</h2>
+  <div id="error" class="error">Usuário ou senha incorretos!</div>
+  <input type="text" id="username" placeholder="Usuário" />
+  <input type="password" id="password" placeholder="Senha" />
+  <button onclick="login()">Entrar</button>
 </div>
 
-<!-- Área de Login e Cadastro -->
-<div id="login-cadastro-area">
-  <div class="form-container">
-    <h2>Login</h2>
-    <form id="login-form">
-      <div class="form-group">
-        <label for="usuario">Usuário</label>
-        <input type="text" id="usuario" name="usuario" required />
-      </div>
-      <div class="form-group">
-        <label for="senha">Senha</label>
-        <input type="password" id="senha" name="senha" required />
-      </div>
-      <div class="form-group">
-        <button type="submit">Entrar</button>
-      </div>
-    </form>
-  </div>
-
-  <div id="cadastro" class="form-container">
-    <h2>Criar Conta</h2>
-    <form id="cadastro-form">
-      <div class="form-group">
-        <label for="nome">Nome</label>
-        <input type="text" id="nome" name="nome" required />
-      </div>
-      <div class="form-group">
-        <label for="telefone">Telefone</label>
-        <input type="tel" id="telefone" name="telefone" required />
-      </div>
-      <div class="form-group">
-        <label for="data-nascimento">Data de Nascimento</label>
-        <input type="date" id="data-nascimento" name="data-nascimento" required />
-      </div>
-      <div class="form-group">
-        <label for="nova-senha">Senha</label>
-        <input type="password" id="nova-senha" name="nova-senha" required />
-      </div>
-      <div class="form-group">
-        <button type="submit">Cadastrar</button>
-      </div>
-    </form>
-  </div>
-
-  <div id="usuarios-cadastrados">
-    <h3>Usuários cadastrados</h3>
-    <ul id="lista-usuarios"></ul>
+<div class="app-box" id="appBox">
+  <h1>Painel de Controle</h1>
+  <div class="panel-buttons">
+    <button onclick="alert('Erro de sistema detectado!')">Erro de Sistema</button>
+    <button onclick="alert('Falha na rede!')">Falha na Rede</button>
+    <button onclick="alert('Jogos ao vivo ativados!')">Ativa Jogos Ao Vivo</button>
+    <button onclick="alert('Telegram VIP liberado! 👑')">Libera Telegram VIP 👑</button>
+    <button onclick="alert('Pagamento pendente!')">Pagamento Pendente</button>
+    <button onclick="alert('Pagamento recebido!')">Pagamento Recebido</button>
+    <button onclick="alert('IA Atualizada com sucesso!')">Atualizar IA</button>
   </div>
 </div>
-
-<!-- Área do Chute Milionário (escondida inicialmente) -->
-<div id="chute-milionario">
-  <h1>Chute Milionário</h1>
-
-  <div class="btn-group">
-    <a href="https://t.me/seu_telegram_vip" target="_blank" class="btn">Telegram VIP</a>
-    <a href="https://t.me/seu_telegram_free" target="_blank" class="btn">Telegram Free</a>
-  </div>
-
-  <div class="message">
-    Seja bem-vindo ao Chute Milionário! Aqui você encontra as melhores dicas e análises para apostar com inteligência e aumentar suas chances de ganhar.
-  </div>
-
-  <div class="bottom-buttons">
-    <button class="btn" onclick="alert('Buscando último resultado...')">Buscar Último Resultado</button>
-    <button class="btn" onclick="alert('Analisando ao vivo...')">Analisar Ao Vivo</button>
-  </div>
-
-  <footer>
-    Criado por Niel Lima
-  </footer>
-</div>
-
-<footer>
-  <p>&copy; 2025 El Diacho de Tips Apostas</p>
-</footer>
 
 <script>
-  // Função para pegar usuários do localStorage ou criar array vazio
-  function pegarUsuarios() {
-    const usuariosJSON = localStorage.getItem('usuarios');
-    return usuariosJSON ? JSON.parse(usuariosJSON) : [];
-  }
+  function login() {
+    const user = document.getElementById('username').value;
+    const pass = document.getElementById('password').value;
+    const error = document.getElementById('error');
 
-  // Função para salvar usuários no localStorage
-  function salvarUsuarios(usuarios) {
-    localStorage.setItem('usuarios', JSON.stringify(usuarios));
-  }
-
-  // Atualiza a lista visível de usuários cadastrados com animação
-  function atualizarListaUsuarios() {
-    const lista = document.getElementById('lista-usuarios');
-    const usuarios = pegarUsuarios();
-
-    lista.innerHTML = '';
-    if (usuarios.length === 0) {
-      lista.innerHTML = '<li>Nenhum usuário cadastrado ainda.</li>';
-      return;
-    }
-
-    usuarios.forEach((user, index) => {
-      const li = document.createElement('li');
-      li.textContent = user.nome + ' - ' + user.telefone;
-      li.style.animationDelay = (index * 0.1) + 's';
-      lista.appendChild(li);
-    });
-  }
-
-  // Manipulação do formulário de cadastro
-  const formCadastro = document.getElementById('cadastro-form');
-  formCadastro.addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    const nome = document.getElementById('nome').value.trim();
-    const telefone = document.getElementById('telefone').value.trim();
-    const dataNascimento = document.getElementById('data-nascimento').value;
-    const senha = document.getElementById('nova-senha').value;
-
-    if (!nome || !telefone || !dataNascimento || !senha) {
-      alert('Por favor, preencha todos os campos!');
-      return;
-    }
-
-    const usuarios = pegarUsuarios();
-    // Aqui você poderia adicionar lógica para verificar se usuário já existe
-
-    usuarios.push({ nome, telefone, dataNascimento, senha });
-    salvarUsuarios(usuarios);
-
-    alert('Cadastro realizado com sucesso!');
-
-    formCadastro.reset();
-    atualizarListaUsuarios();
-  });
-
-  // Manipulação do formulário de login (exemplo simples)
-  const formLogin = document.getElementById('login-form');
-  formLogin.addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    const usuario = document.getElementById('usuario').value.trim();
-    const senha = document.getElementById('senha').value;
-
-    const usuarios = pegarUsuarios();
-    const usuarioEncontrado = usuarios.find(u => u.nome === usuario && u.senha === senha);
-
-    if (usuarioEncontrado) {
-      alert('Login bem-sucedido! Bem-vindo, ' + usuarioEncontrado.nome);
-      // Aqui você poderia mostrar a área "Chute Milionário" ou outra ação
-      document.getElementById('chute-milionario').style.display = 'block';
-      document.getElementById('login-cadastro-area').style.display = 'none';
+    if (user === 'Victor' && pass === 'v2025') {
+      document.getElementById('loginBox').classList.remove('active');
+      document.getElementById('appBox').classList.add('active');
+      error.style.display = 'none';
     } else {
-      alert('Usu
+      error.style.display = 'block';
+    }
+  }
+</script>
+
+</body>
+</html>
